@@ -16,6 +16,12 @@ module RubyByRuby
         node.children.map { |child| eval_node(child, env) }.last
       when :FCALL
         p(eval_node(node.children[1].children[0], env))
+      when :IF
+        if eval_node(node.children[0], env)
+          eval_node(node.children[1], env)
+        else
+          eval_node(node.children[2], env)
+        end
       when :LASGN
         env[node.children[0]] = eval_node(node.children[1], env)
       when :LIT

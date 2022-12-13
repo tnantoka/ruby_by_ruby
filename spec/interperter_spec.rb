@@ -49,4 +49,19 @@ RSpec.describe RubyByRuby do
       expect { interpreter.eval(source) }.to output("1\n").to_stdout
     end
   end
+
+  describe 'if' do
+    let(:source) do
+      <<~SRC
+        if 1 < 2
+          1
+        else
+          2
+        end
+      SRC
+    end
+    it do
+      expect(interpreter.eval(source)).to eq(1)
+    end
+  end
 end
