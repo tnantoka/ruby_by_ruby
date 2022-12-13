@@ -10,6 +10,7 @@ RSpec.describe RubyByRuby do
     it { expect(interpreter.eval('4 / 2')).to eq(2) }
     it { expect(interpreter.eval('5 % 2')).to eq(1) }
     it { expect(interpreter.eval('2 ** 3')).to eq(8) }
+    it { expect(interpreter.eval('(1 + 2) / 3 * 4 * (56 / 7 + 8 + 9)')).to eq(100) }
   end
 
   describe 'comparison operator' do
