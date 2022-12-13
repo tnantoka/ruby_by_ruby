@@ -14,6 +14,11 @@ module RubyByRuby
       case node.type
       when :BLOCK
         node.children.map { |child| eval_node(child, env) }.last
+      when :CALL
+        receiver = eval_node(node.children[0], env)
+        method = node.children[1]
+        args = node.children[2].children.compact.map { eval_node(_1, env) }
+        receiver.send(method, *args)
       when :FCALL
         p(eval_node(node.children[1].children[0], env))
       when :IF
@@ -37,6 +42,8 @@ module RubyByRuby
         eval_node(node.children[2], env)
       when :STR
         node.children[0]
+      when :WHILE
+        eval_node(node.children[1], env) while eval_node(node.children[0], env)
       else
         raise node.inspect
       end

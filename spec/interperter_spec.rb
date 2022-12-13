@@ -64,4 +64,19 @@ RSpec.describe RubyByRuby do
       expect(interpreter.eval(source)).to eq(1)
     end
   end
+
+  describe 'while' do
+    let(:source) do
+      <<~SRC
+        i = 0
+        while i < 5
+          i += 1
+        end
+        i
+      SRC
+    end
+    it do
+      expect(interpreter.eval(source)).to eq(5)
+    end
+  end
 end
