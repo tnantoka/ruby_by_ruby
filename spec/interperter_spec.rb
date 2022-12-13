@@ -36,4 +36,16 @@ RSpec.describe RubyByRuby do
       expect { interpreter.eval(source) }.to output("1\n2\n").to_stdout
     end
   end
+
+  describe 'variables' do
+    let(:source) do
+      <<~SRC
+        a = 1
+        puts(a)
+      SRC
+    end
+    it do
+      expect { interpreter.eval(source) }.to output("1\n").to_stdout
+    end
+  end
 end
