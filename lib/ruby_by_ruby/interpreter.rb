@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Lint/DuplicateBranch, Metrics/CyclomaticComplexity
+# rubocop:disable Lint/DuplicateBranch, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 module RubyByRuby
   class Interpreter
     def eval(source)
@@ -19,6 +19,20 @@ module RubyByRuby
         method = node.children[1]
         args = node.children[2].children.compact.map { eval_node(_1, env) }
         receiver.send(method, *args)
+      when :CASE
+        value = eval_node(node.children[0], env)
+        condition = node.children[1]
+        result = nil
+        loop do
+          if condition.children[0].children.compact.any? { |child| eval_node(child, env) == value }
+            result = eval_node(condition.children[1], env)
+          else
+            condition = condition.children[2]
+          end
+
+          break if !result.nil? || condition.nil?
+        end
+        result
       when :FCALL
         p(eval_node(node.children[1].children[0], env))
       when :IF
@@ -50,4 +64,4 @@ module RubyByRuby
     end
   end
 end
-# rubocop:enable Lint/DuplicateBranch, Metrics/CyclomaticComplexity
+# rubocop:enable Lint/DuplicateBranch, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity

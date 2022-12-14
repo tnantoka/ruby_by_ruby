@@ -79,4 +79,22 @@ RSpec.describe RubyByRuby do
       expect(interpreter.eval(source)).to eq(5)
     end
   end
+
+  describe 'case' do
+    let(:source) do
+      <<~SRC
+        case 3
+        when 1
+          'a'
+        when 2, 3
+          'b'
+        else
+          'c'
+        end
+      SRC
+    end
+    it do
+      expect(interpreter.eval(source)).to eq('b')
+    end
+  end
 end
