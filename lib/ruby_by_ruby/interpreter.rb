@@ -56,6 +56,8 @@ module RubyByRuby
         eval_node(node.children[2], env)
       when :STR
         node.children[0]
+      when :UNTIL
+        eval_node(node.children[1], env) until eval_node(node.children[0], env)
       when :WHILE
         eval_node(node.children[1], env) while eval_node(node.children[0], env)
       else

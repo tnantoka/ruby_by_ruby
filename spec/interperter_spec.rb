@@ -82,6 +82,51 @@ RSpec.describe RubyByRuby do
     end
   end
 
+  describe 'while modifier' do
+    let(:source) do
+      <<~SRC
+        i = 0
+        begin
+          i += 1
+        end while i < 5
+        i
+      SRC
+    end
+    it do
+      expect(interpreter.eval(source)).to eq(5)
+    end
+  end
+
+  describe 'until' do
+    let(:source) do
+      <<~SRC
+        i = 0
+        until i > 5
+          i += 1
+        end
+        i
+      SRC
+    end
+    it do
+      expect(interpreter.eval(source)).to eq(6)
+    end
+  end
+
+  describe 'until modifier' do
+    let(:source) do
+      <<~SRC
+        i = 0
+        begin
+          i += 1
+        end until i > 5
+        i
+      SRC
+    end
+    it do
+      expect(interpreter.eval(source)).to eq(6)
+    end
+  end
+
   describe 'case' do
     let(:source) do
       <<~SRC
