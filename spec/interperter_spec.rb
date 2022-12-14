@@ -53,15 +53,17 @@ RSpec.describe RubyByRuby do
   describe 'if' do
     let(:source) do
       <<~SRC
-        if 1 < 2
+        if 1 > 2
           1
-        else
+        elsif 2 < 3
           2
+        else
+          3
         end
       SRC
     end
     it do
-      expect(interpreter.eval(source)).to eq(1)
+      expect(interpreter.eval(source)).to eq(2)
     end
   end
 
