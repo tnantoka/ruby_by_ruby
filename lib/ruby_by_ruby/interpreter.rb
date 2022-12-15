@@ -53,6 +53,12 @@ module RubyByRuby
           method[1].each_with_index { |name, i| new_lenv[name] = args[i] }
           eval_node(method[2], genv, new_lenv)
         end
+      when :HASH
+        {}.tap do |hash|
+          node.children[0].children.compact.each_slice(2) do |k, v|
+            hash[eval_node(k, genv, lenv)] = eval_node(v, genv, lenv)
+          end
+        end
       when :IF
         if eval_node(node.children[0], genv, lenv)
           eval_node(node.children[1], genv, lenv)

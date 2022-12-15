@@ -174,4 +174,17 @@ RSpec.describe RubyByRuby do
       expect(interpreter.eval(source)).to eq(3)
     end
   end
+
+  describe 'hash' do
+    let(:source) do
+      <<~SRC
+        a = { a: 1, b: 2 }
+        a[:b] = 1
+        a[:a] + a[:b]
+      SRC
+    end
+    it do
+      expect(interpreter.eval(source)).to eq(2)
+    end
+  end
 end
