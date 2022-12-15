@@ -29,8 +29,8 @@ RSpec.describe RubyByRuby do
   describe 'statements' do
     let(:source) do
       <<~SRC
-        puts(1)
-        puts(2)
+        p(1)
+        p(2)
       SRC
     end
     it do
@@ -42,7 +42,7 @@ RSpec.describe RubyByRuby do
     let(:source) do
       <<~SRC
         a = 1
-        puts(a)
+        p(a)
       SRC
     end
     it do
@@ -142,6 +142,23 @@ RSpec.describe RubyByRuby do
     end
     it do
       expect(interpreter.eval(source)).to eq('b')
+    end
+  end
+
+  describe 'def' do
+    let(:source) do
+      <<~SRC
+        a = 0
+        def add(x, y)
+          a = 1
+          x + y
+        end
+        b = add(1, 1)
+        a + b
+      SRC
+    end
+    it do
+      expect(interpreter.eval(source)).to eq(2)
     end
   end
 end
