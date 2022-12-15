@@ -15,6 +15,11 @@ module RubyByRuby
 
     def eval_node(node, genv, lenv)
       case node.type
+      when :ATTRASGN
+        receiver = eval_node(node.children[0], genv, lenv)
+        method = node.children[1]
+        args = node.children[2].children.compact.map { eval_node(_1, genv, lenv) }
+        receiver.send(method, *args)
       when :BLOCK
         node.children.map { eval_node(_1, genv, lenv) }.last
       when :CALL
@@ -56,6 +61,8 @@ module RubyByRuby
         end
       when :LASGN
         lenv[node.children[0]] = eval_node(node.children[1], genv, lenv)
+      when :LIST
+        node.children.compact.map { eval_node(_1, genv, lenv) }
       when :LIT
         node.children[0]
       when :LVAR

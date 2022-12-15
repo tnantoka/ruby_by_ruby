@@ -161,4 +161,17 @@ RSpec.describe RubyByRuby do
       expect(interpreter.eval(source)).to eq(2)
     end
   end
+
+  describe 'array' do
+    let(:source) do
+      <<~SRC
+        a = [1, 2, 3]
+        a[2] = 1
+        a[1] + a[2]
+      SRC
+    end
+    it do
+      expect(interpreter.eval(source)).to eq(3)
+    end
+  end
 end
