@@ -12,5 +12,13 @@ Metrics/BlockLength:
   Exclude:
     - spec/**/*.rb
 
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - lib/ruby_by_ruby/interpreter.rb
+
 Metrics/MethodLength:
   Enabled: false
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - lib/ruby_by_ruby/interpreter.rb

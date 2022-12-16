@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe RubyByRuby do
+RSpec.describe RubyByRuby::Interpreter do
   let(:interpreter) { RubyByRuby::Interpreter.new }
 
   describe 'arithmetic operation' do

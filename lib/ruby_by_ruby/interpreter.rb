@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Lint/DuplicateBranch, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 module RubyByRuby
   class Interpreter
     def eval(source)
@@ -15,18 +14,13 @@ module RubyByRuby
 
     def eval_node(node, genv, lenv)
       case node.type
-      when :ATTRASGN
+      when :ATTRASGN, :CALL, :OPCALL
         receiver = eval_node(node.children[0], genv, lenv)
         method = node.children[1]
         args = node.children[2].children.compact.map { eval_node(_1, genv, lenv) }
         receiver.send(method, *args)
       when :BLOCK
         node.children.map { eval_node(_1, genv, lenv) }.last
-      when :CALL
-        receiver = eval_node(node.children[0], genv, lenv)
-        method = node.children[1]
-        args = node.children[2].children.compact.map { eval_node(_1, genv, lenv) }
-        receiver.send(method, *args)
       when :CASE
         value = eval_node(node.children[0], genv, lenv)
         condition = node.children[1]
@@ -69,19 +63,12 @@ module RubyByRuby
         lenv[node.children[0]] = eval_node(node.children[1], genv, lenv)
       when :LIST
         node.children.compact.map { eval_node(_1, genv, lenv) }
-      when :LIT
+      when :LIT, :STR
         node.children[0]
       when :LVAR
         lenv[node.children[0]]
-      when :OPCALL
-        receiver = eval_node(node.children[0], genv, lenv)
-        method = node.children[1]
-        args = node.children[2].children.compact.map { eval_node(_1, genv, lenv) }
-        receiver.send(method, *args)
       when :SCOPE
         eval_node(node.children[2], genv, lenv)
-      when :STR
-        node.children[0]
       when :UNTIL
         eval_node(node.children[1], genv, lenv) until eval_node(node.children[0], genv, lenv)
       when :WHILE
@@ -92,4 +79,3 @@ module RubyByRuby
     end
   end
 end
-# rubocop:enable Lint/DuplicateBranch, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
