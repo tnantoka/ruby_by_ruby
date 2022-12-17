@@ -34,12 +34,3 @@ elements.run.addEventListener('click', () => {
   rubyVM.eval(editors.interpreter.getValue());
   rubyVM.eval(editors.example.getValue());
 });
-
-window.example = {
-  reset: (value) => {
-    elements.output.innerHTML = ''; 
-  },
-  log: (value) => {
-    elements.output.innerHTML += `${value}\n`;
-  }
-};
