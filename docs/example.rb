@@ -11,7 +11,7 @@ output.append("1 + 1 = #{interpreter.eval('1 + 1')}\n")
 
 code = <<~CODE
   def random
-    val = rand(30)
+    val = rand(1..30)
     [val, val % 2 == 0 ? 'even' : 'odd'].join(': ')
   end
   random()

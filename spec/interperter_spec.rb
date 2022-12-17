@@ -187,4 +187,10 @@ RSpec.describe RubyByRuby::Interpreter do
       expect(interpreter.eval(source)).to eq(2)
     end
   end
+
+  describe 'range' do
+    it do
+      expect(interpreter.eval('1..5')).to eq(1..5)
+    end
+  end
 end

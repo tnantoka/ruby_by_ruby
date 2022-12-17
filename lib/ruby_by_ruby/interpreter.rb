@@ -38,6 +38,8 @@ module RubyByRuby
         result
       when :DEFN
         genv[node.children[0]] = ['user_defined', node.children[1].children[0], node.children[1].children[2]]
+      when :DOT2
+        eval_node(node.children[0], genv, lenv)..eval_node(node.children[1], genv, lenv)
       when :FCALL
         method = genv[node.children[0]]
         args = node.children[1]&.children.to_a.compact.map { eval_node(_1, genv, lenv) }
