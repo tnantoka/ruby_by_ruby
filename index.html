@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ruby by Ruby</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+  <link href="docs/style.css" rel="stylesheet">
+
+  <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand border-bottom bg-light">
+    <div class="container">
+      <a class="navbar-brand me-2" href="/">Ruby by Ruby</a>
+      <small>
+        with
+        <a href="https://docs.ruby-lang.org/ja/latest/class/RubyVM=3a=3aAbstractSyntaxTree.html">RubyVM::AbstractSyntaxTree</a>
+        on
+        <a href="https://github.com/ruby/ruby.wasm">ruby.wasm</a>
+      </small>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/tnantoka/ruby_by_ruby">GitHub</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col">
+        <h5># interpreter.rb</h5>
+        <textarea data-id="interpreter"></textarea>
+      </div>
+
+      <div class="col">
+        <h5># example.rb</h5>
+        <textarea data-id="example"></textarea>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-dark" data-id="run">Run</button>
+        </div>
+
+        <h5 class="mt-4">output</h5>
+        <pre class="bg-light mt-3 p-2 border" data-id="output"></pre>
+      
+        <h5 class="mt-4">参考</h5>
+        <p>
+          <a href="https://www.lambdanote.com/products/ruby-ruby">
+            RubyでつくるRuby ゼロから学びなおすプログラミング言語入門
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ruby-head-wasm-wasi@0.5.0/dist/browser.script.iife.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.14.0/src-noconflict/ace.min.js"></script>
+
+  <script src="docs/script.js"></script>
+</body>
+
+</html>

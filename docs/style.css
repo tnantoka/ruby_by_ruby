@@ -1,0 +1,9 @@
+input,
+textarea,
+button {
+  border-radius: 0 !important;
+}
+
+pre {
+  min-height: 5rem;
+}

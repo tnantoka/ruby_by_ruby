@@ -4,7 +4,8 @@ module RubyByRuby
   class Interpreter
     def eval(source)
       genv = {
-        p: %i[builtin p]
+        p: %i[builtin p],
+        rand: %i[builtin rand]
       }
       lenv = {}
       eval_node(RubyVM::AbstractSyntaxTree.parse(source), genv, lenv)
@@ -39,7 +40,7 @@ module RubyByRuby
         genv[node.children[0]] = ['user_defined', node.children[1].children[0], node.children[1].children[2]]
       when :FCALL
         method = genv[node.children[0]]
-        args = node.children[1].children.compact.map { eval_node(_1, genv, lenv) }
+        args = node.children[1]&.children.to_a.compact.map { eval_node(_1, genv, lenv) }
         if method[0] == :builtin
           send(method[1], *args)
         else
