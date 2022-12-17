@@ -17,17 +17,16 @@ const editors = {};
   ace.config.set('basePath', 'https://cdn.jsdelivr.net/npm/ace-builds@1.14.0/src-noconflict/');
 
   ['interpreter', 'example'].forEach((id) => {
-    editors[id] = editor = ace.edit(elements[id], {
+    const editor = ace.edit(elements[id], {
       mode: 'ace/mode/ruby',
       maxLines: Infinity,
       wrap: true,
       showPrintMargin: false,
       fontSize: 14,
     })
+    editor.container.classList.add('border');
+    editors[id] = editor;
   });
-
-  [...document.querySelectorAll('.ace_editor')]
-    .forEach((element) => element.classList.add('border'));
 })();
 
 elements.run.addEventListener('click', () => {
