@@ -1,33 +1,21 @@
-# RubyByRuby
+# Ruby by Ruby
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ruby_by_ruby`. To experiment with that code, run `bin/console` for an interactive prompt.
+ruby_by_ruby is a toy ruby ​​interpreter with [RubyVM::AbstractSyntaxTree](https://ruby-doc.org/3.1.3/RubyVM/AbstractSyntaxTree.html).
 
-TODO: Delete this and the text above, and describe your gem
+## Demo on [ruby.wasm](https://github.com/ruby/ruby.wasm)
 
-## Installation
-
-Install the gem and add to the application's Gemfile by executing:
-
-    $ bundle add ruby_by_ruby
-
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install ruby_by_ruby
+https://tnantoka.github.io/ruby_by_ruby/
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+interpreter = RubyByRuby::Interpreter.new
+interpreter.eval('1 + 1') # => 2
+```
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+## Acknowledgments
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ruby_by_ruby.
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+https://www.lambdanote.com/products/ruby-ruby
